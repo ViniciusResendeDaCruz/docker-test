@@ -11,8 +11,11 @@ app.get('/', (req, res) => {
 });
 
 // Rota de teste
-app.get('/teste', (req, res) => {
-  res.json({ message: 'Esta é uma rota de teste atuaslizada!' });
+app.get('/teste', async (req, res) => {
+  //vamos fazer uma requisição GET para jsonplaceholder e retornar o resultado
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const data = await response.json();
+  res.json(data);
 });
 
 // Iniciando o servidor
