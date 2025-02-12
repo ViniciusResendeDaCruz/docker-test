@@ -49,6 +49,27 @@ docker compose logs -f
 docker compose down
 ```
 
+### Atualizando a Aplicação
+
+Quando fizer alterações no código:
+```bash
+# As alterações em arquivos como index.js são automáticas devido aos volumes configurados
+# Mas se precisar forçar um rebuild:
+docker compose up --build -d
+```
+
+Quando alterar Dockerfile ou dependências (package.json):
+```bash
+# Para tudo e remove containers
+docker compose down
+
+# Remove a imagem antiga
+docker rmi api-express
+
+# Reconstrói e inicia
+docker compose up --build -d
+```
+
 ### Usando Docker diretamente
 
 1. Construir a imagem:
@@ -81,14 +102,17 @@ docker run -p 3000:3000 api-teste
 ## Rotas da API
 
 - `GET /`: Retorna uma mensagem "Hello World"
-- `GET /teste`: Retorna uma mensagem de teste
+- `GET /teste`: Retorna dados de exemplo do JSONPlaceholder
 
 ## Testando
 
 Você pode testar as rotas usando curl ou seu navegador:
 
 ```bash
+# Retorna Hello World
 curl http://localhost:3000/
+
+# Retorna posts do JSONPlaceholder
 curl http://localhost:3000/teste
 ```
 
