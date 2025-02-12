@@ -5,7 +5,7 @@ FROM node:18-slim
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
 # Definindo o diretório de trabalho no container
-WORKDIR /app
+WORKDIR /build/docker-test
 
 # Copiando os arquivos de dependências
 COPY package*.json ./
